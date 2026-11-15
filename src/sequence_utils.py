@@ -12,7 +12,7 @@ def clean_sequence(raw: str) -> str:
 def is_valid_dna(sequence: str, allow_n: bool = False) -> bool:
     """True for a non-empty string of A, C, G, T (N if allowed)."""
     allowed = DNA_BASES | {"N"} if allow_n else DNA_BASES
-    return bool(sequence)  and set(sequence.upper()) <= allowed
+    return bool(sequence) and set(sequence.upper()) <= allowed
 
 
 def gc_content(sequence: str) -> float:
@@ -20,7 +20,7 @@ def gc_content(sequence: str) -> float:
     if not is_valid_dna(sequence):
         raise ValueError(f"invalid DNA sequence: {sequence!r}")
     seq = sequence.upper()
-    return (seq.count("G") + seq.count("C")) / len(seq) *100
+    return (seq.count("G") + seq.count("C")) / len(seq) * 100
 
 
 def reverse_complement(sequence: str) -> str:
@@ -35,5 +35,4 @@ def find_motif(sequence: str, motif: str) -> list[int]:
     if not motif:
         raise ValueError("motif must not be empty")
     seq, mot = sequence.upper(), motif.upper()
-    return [i for i in range(len(seq) - len(mot) + 1)
-            if seq.startswith(mot, i)]
+    return [i for i in range(len(seq) - len(mot) + 1) if seq.startswith(mot, i)]
